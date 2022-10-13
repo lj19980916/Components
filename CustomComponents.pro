@@ -18,23 +18,23 @@ DEFINES += QT_DEPRECATED_WARNINGS
 SOURCES += \
     AbstructCustomClass.cpp \
     ArgumentsClass.cpp \
+    CUICheckBoxWidget.cpp \
+    CUIComboBoxWidget.cpp \
+    CUILineEditWidget.cpp \
     CUIRadioButtonWidget.cpp \
-    CheckBox.cpp \
-    ComboBox.cpp \
     CustomClass.cpp \
-    LineEdit.cpp \
     main.cpp \
     CustomCollectionWidget.cpp
 
 HEADERS += \
     AbstructCustomClass.h \
     ArgumentsClass.h \
+    CUICheckBoxWidget.h \
+    CUIComboBoxWidget.h \
+    CUILineEditWidget.h \
     CUIRadioButtonWidget.h \
-    CheckBox.h \
-    ComboBox.h \
     CustomClass.h \
-    CustomCollectionWidget.h \
-    LineEdit.h
+    CustomCollectionWidget.h
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
