@@ -7,7 +7,6 @@
 #include <QDebug>
 #include <QSpacerItem>
 #include <QComboBox>
-#include "RadioButton.h"
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1600)
 # pragma execution_character_set("utf-8")
@@ -91,7 +90,7 @@ Widget::Widget(QWidget *parent)
     custom7.setCustomConfig(DataType::QStringType,tr("湍流模型"),ComponentType::ComboBox,tr("k-e"),true,tr("k-e"));
     argument4.AddArgument(custom7);
     setWidgetList(argument4);
-    setGeometry(0,0,400,800);
+    setGeometry(0,0,430,800);
     button=new QPushButton;
     connect(button,&QPushButton::clicked,this,&Widget::save);
     render();
@@ -141,7 +140,7 @@ void Widget::setWidgetList(ArgumentsClass c)
     _widgetList.push_back(c);
 }
 
-void Widget::AddCustomObjList(AbstructCustomClass c)
+void Widget::AddCustomObjList(AbstructCustomClass* c)
 {
     _customObjList.push_back(c);
 }
@@ -185,12 +184,10 @@ void Widget::initCustom(CustomClass custom,QFormLayout* FormLayout)
     {
     case RadioButton:
     {
-//                RadioButton *radioButton=new RadioButton();
-//                AddCustomObjList(radioButton);
-//                radioButton.setconfig(_widgetList.at(i).getArgument().at(j));
-//                radioButton.render();
-//                AddCustomObjList()
-        QRadioButton *radiobutton=new QRadioButton(custom.defaultValue());
+        CUIRadioButtonWidget *radiobutton=new CUIRadioButtonWidget();
+        AddCustomObjList(radiobutton);
+        radiobutton->setconfig(custom);
+        radiobutton->render();
         FormLayout->addRow(labeltitle,radiobutton);
         break;
     }
