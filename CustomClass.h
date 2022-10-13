@@ -1,4 +1,4 @@
-#ifndef CUSTOMCLASS_H
+﻿#ifndef CUSTOMCLASS_H
 #define CUSTOMCLASS_H
 
 #include <QList>
@@ -37,6 +37,7 @@ public:
     void setRequired(bool required);//设置组件是否必填
     QString getValue();
     void setValue(QString value);
+    void setCustomConfig(DataType dataType,QString label,ComponentType type,QString defaultValue,bool required,QString value);
 private:
     DataType _dataType;//参数的数据类型
     QString _label;//每一行的标题

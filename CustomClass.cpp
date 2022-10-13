@@ -1,4 +1,4 @@
-#include "CustomClass.h"
+﻿#include "CustomClass.h"
 
 CustomClass::CustomClass()
 {
@@ -83,5 +83,15 @@ QString CustomClass::getValue()
 
 void CustomClass::setValue(QString value)
 {
+    _Value=value;
+}
+
+void CustomClass::setCustomConfig(DataType dataType, QString label, ComponentType type, QString defaultValue, bool required, QString value)
+{
+    _dataType=dataType;
+    _label=label;
+    _componentType=type;
+    _defaultValue=defaultValue;
+    _required=required;
     _Value=value;
 }
