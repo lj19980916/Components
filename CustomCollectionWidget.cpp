@@ -7,6 +7,7 @@
 #include <QDebug>
 #include <QSpacerItem>
 #include <QComboBox>
+#include <QMessageBox>
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1600)
 # pragma execution_character_set("utf-8")
@@ -78,6 +79,7 @@ Widget::Widget(QWidget *parent)
     custom6.setCustomConfig(DataType::QStringType,tr("高级设置"),ComponentType::RadioButton,tr("不开启"),true,tr("不开启"));
     argument3.AddArgument(custom6);
     setWidgetList(argument3);
+
     ArgumentsClass argument4;//第四个groupbox
     argument4.setGroupName(tr("湍流"));
     CustomClass custom7;
@@ -90,6 +92,21 @@ Widget::Widget(QWidget *parent)
     custom7.setCustomConfig(DataType::QStringType,tr("湍流模型"),ComponentType::ComboBox,tr("k-e"),true,tr("k-e"));
     argument4.AddArgument(custom7);
     setWidgetList(argument4);
+
+    ArgumentsClass argument5;//第五个groupbox
+    argument5.setGroupName(tr("测试int"));
+    CustomClass custom8;
+    QList<int> candidateValueList8={};
+    candidateValueList8<<1<<2<<3;
+    for (int i=0;i<candidateValueList8.size();i++) {
+        custom8.setIntCandidateValue(candidateValueList8.at(i));
+    }
+    custom8.setEditable(true);
+    custom8.setCustomConfig(DataType::IntType,tr("测试int"),ComponentType::RadioButton,1,true,1);
+    argument5.AddArgument(custom8);
+    setWidgetList(argument5);
+
+
     setGeometry(0,0,430,800);
     button=new QPushButton;
     connect(button,&QPushButton::clicked,this,&Widget::save);
@@ -149,13 +166,13 @@ QString Widget::GroupboxStyle()
 {
     QString style="QGroupBox"
                   "{"
-                  "margin-top:20px;"
+                  "margin-top:18px;"
                   "}"
                   "QGroupBox:title"
                   "{"
                   "subcontrol-origin: margin;"
                   "subcontrol-position: top left;"
-                  "left: -6px;"
+                  "left: -3px;"
                   "padding:0 1px;"
                   "}";
     return style;
@@ -172,14 +189,14 @@ void Widget::initGroupBox(QGroupBox *groupbox,ArgumentsClass argument, QFormLayo
     groupbox->setSizePolicy(GroupBoxSizePolicy);
     if(argument.getGroupName()=="")
     {
-        groupbox->setStyleSheet("QGroupBox {border:none}");
+        groupbox->setStyleSheet("QGroupBox{border:none}");
     }
 }
 
 void Widget::initCustom(CustomClass custom,QFormLayout* FormLayout)
 {
     QLabel *labeltitle=new QLabel(custom.Label());
-    labeltitle->setFixedWidth(200);
+    labeltitle->setFixedWidth(150);
     switch (custom.getComponentType())
     {
     case RadioButton:
@@ -201,10 +218,14 @@ void Widget::initCustom(CustomClass custom,QFormLayout* FormLayout)
     }
     case ComboBox:
     {
-        QComboBox *combox=new QComboBox;
-        for (int i=0;i<custom.candidateValue().size();i++) {
-            combox->addItem(custom.candidateValue().at(i));
-        }
+        CUIComboBoxWidget *combox=new CUIComboBoxWidget();
+        AddCustomObjList(combox);
+        combox->setconfig(custom);
+        combox->render();
+//        QComboBox *combox=new QComboBox;
+//        for (int i=0;i<custom.candidateValue().size();i++) {
+//            combox->addItem(custom.candidateValue().at(i));
+//        }
         FormLayout->addRow(labeltitle,combox);
         break;
     }
@@ -231,7 +252,10 @@ void Widget::save()
 {
     if(submit())
     {
-        qDebug()<<"123";
+        QMessageBox::information(nullptr,"Message","保存数据成功");
+    }
+    else {
+        //QMessageBox::critical(this, tr(""),  tr(""),QMessageBox::Save | QMessageBox::Discard,  QMessageBox::Discard);
     }
 }
 

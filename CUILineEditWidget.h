@@ -1,14 +1,20 @@
-#ifndef LINEEDIT_H
+﻿#ifndef LINEEDIT_H
 #define LINEEDIT_H
 
+#include <QLineEdit>
 #include <QWidget>
-
-class LineEdit : public QWidget
+#include "AbstructCustomClass.h"
+class CUILineEditWidget : public QWidget,public AbstructCustomClass
 {
     Q_OBJECT
 public:
-    explicit LineEdit(QWidget *parent = nullptr);
-
+    explicit CUILineEditWidget(QWidget *parent = nullptr);
+    void render() override;
+    bool submit() override;
+    void turn_red();
+    void check_correct();
+private:
+    QLineEdit *Le_edit=new QLineEdit();
 signals:
 
 };

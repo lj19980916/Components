@@ -8,6 +8,9 @@
 #include "AbstructCustomClass.h"
 #include "ArgumentsClass.h"
 #include "CUIRadioButtonWidget.h"
+#include "CUICheckBoxWidget.h"
+#include "CUIComboBoxWidget.h"
+#include "CUILineEditWidget.h"
 class Widget : public QWidget
 {
     Q_OBJECT

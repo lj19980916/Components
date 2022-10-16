@@ -14,21 +14,55 @@ void CUIRadioButtonWidget::render()
        CustomClass custom=getconfig();
        QRadioButton *btnRadio;//动态创建按钮指针
        QHBoxLayout *Hlayout=new QHBoxLayout();
-       int total=custom.candidateValue().size();
-       for(int i=0;i<total;i++)
+
+       switch (custom.getDataType()) {
+
+       case QStringType:
        {
-           btnRadio=new QRadioButton;
-           //设置按钮对象名字
-           btnRadio->setText(custom.candidateValue().at(i));
-           if(custom.defaultValue()==custom.candidateValue().at(i))
-               btnRadio->setChecked(true);
-           //把按钮添加到按钮列表中
-           btnRadiolist.append(btnRadio);
-           //把按钮添加到组中
-           //block1->addButton(btnRadio,i);
-           //设置按钮的水平布局
-           Hlayout->addWidget(btnRadio);
+           int total=custom.candidateValue().size();
+           for(int i=0;i<total;i++)
+           {
+               btnRadio=new QRadioButton;
+               //设置按钮对象名字
+               btnRadio->setText(custom.candidateValue().at(i));
+               if(custom.defaultValue()==custom.candidateValue().at(i))
+                   btnRadio->setChecked(true);
+               //把按钮添加到按钮列表中
+               btnRadiolist.append(btnRadio);
+               //把按钮添加到组中
+               //block1->addButton(btnRadio,i);
+               //设置按钮的水平布局
+               Hlayout->addWidget(btnRadio);
+           }
        }
+       case IntType:
+       {
+           int total=custom.IntCandidateValue().size();
+           for(int i=0;i<total;i++)
+           {
+               btnRadio=new QRadioButton;
+               //设置按钮对象名字
+               btnRadio->setText(QString::number(custom.IntCandidateValue().at(i)));
+               if(custom.IntDefaultValue()==custom.IntCandidateValue().at(i))
+                   btnRadio->setChecked(true);
+               //把按钮添加到按钮列表中
+               btnRadiolist.append(btnRadio);
+               //把按钮添加到组中
+               //block1->addButton(btnRadio,i);
+               //设置按钮的水平布局
+               Hlayout->addWidget(btnRadio);
+           }
+       }
+       case BoolType:
+       {
+
+       }
+       case DoubleType:
+       {
+
+       }
+       }
+
        setLayout(Hlayout);
        //this->layout()->contentsMargins();
        this->layout()->setContentsMargins(0,0,0,0);

@@ -14,7 +14,6 @@ public:
     void render() override;
     bool submit() override;//提交的时候检测是否必填的都填了
     QList<QRadioButton*> btnRadiolist={};//动态创建按钮的列表
-    QButtonGroup *block1=new QButtonGroup;
 signals:
 
 };
